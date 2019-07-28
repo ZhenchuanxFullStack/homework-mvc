@@ -50,6 +50,7 @@ describe('HTTP', () => {
               user: 'eric',
               password: 'asdfghjkl;'
           })
+        // fake code
         should(res.statusCode).equal(302)
       });
 
