@@ -1,19 +1,16 @@
-const JSONFileStorage = require('../storages/jsonfile');
+const MYSQL = require('../mysql')
 
 class Model {
 }
 class Todo extends Model {
-  async create(todo) {
-    var todos = await JSONFileStorage.get();
-    todos.push(todo);
-    await JSONFileStorage.update(todos);
-    return todos.length - 1
+  async create (todo) {
+    return await MYSQL.createTodo(todo)
   }
-  async getAll() {
-    return await JSONFileStorage.get();
+  async getAll () {
+    return await MYSQL.getTodoList()
   }
-  async get(id) {
-    return (await this.getAll())[id]
+  async get (id) {
+    return await MYSQL.getTodoById(id)
   }
 }
 
