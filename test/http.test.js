@@ -63,20 +63,22 @@ describe('HTTP', () => {
           .expect(/\d+/)
       })
 
-      it('GET /api/todo should return the data which in file /data/todo.json', async () => {
-        var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
-        var res = await request
-          .get('/api/todo')
-          .expect(dataFile.toString())
-      })
+      // no more need once use mysql
+      // it('GET /api/todo should return the data which in file /data/todo.json', async () => {
+      //   var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
+      //   var res = await request
+      //     .get('/api/todo')
+      //     .expect(dataFile.toString())
+      // })
 
-      it('GET /api/todo/id should return only one todo', async () => {
-        var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
-        var data = JSON.parse(dataFile.toString());
-        var res = await request
-          .get('/api/todo/1')
-          .expect(data[1])
-      })
+      // no more need once use mysql
+      // it('GET /api/todo/id should return only one todo', async () => {
+      //   var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
+      //   var data = JSON.parse(dataFile.toString());
+      //   var res = await request
+      //     .get('/api/todo/1')
+      //     .expect(data[1])
+      // })
 
       it('GET /api/todo/id should return 404 if id not exists', async () => {
         var res = await request
