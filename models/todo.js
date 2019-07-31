@@ -4,16 +4,24 @@ class Model {
 }
 class Todo extends Model {
   async create(todo) {
-    var todos = await JSONFileStorage.get();
-    todos.push(todo);
-    await JSONFileStorage.update(todos);
-    return todos.length - 1
+    const ret = await JSONFileStorage.update(todo);
+    if(ret) {
+      const todos = await module.exports.getAll();
+      return todos.length - 1;
+    }
+    return 0;
   }
   async getAll() {
-    return await JSONFileStorage.get();
+    const todos = await JSONFileStorage.get();
+    return todos;
   }
   async get(id) {
-    return (await this.getAll())[id]
+    let todos = await this.getAll();
+    if(todos.length > 0 && id){
+      return todos[id];
+    } else {
+      return null;
+    }
   }
 }
 
