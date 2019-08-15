@@ -1,19 +1,20 @@
-const JSONFileStorage = require('../storages/jsonfile');
+const mysqlStorage = require('../storages/mysql');
 
 class Model {
 }
 class Todo extends Model {
   async create(todo) {
-    var todos = await JSONFileStorage.get();
-    todos.push(todo);
-    await JSONFileStorage.update(todos);
-    return todos.length - 1
+    return await mysqlStorage.createTodo(todo);
   }
   async getAll() {
-    return await JSONFileStorage.get();
+    return await mysqlStorage.getAll(); 
   }
   async get(id) {
-    return (await this.getAll())[id]
+    try {
+      return await mysqlStorage.getForId(id);
+    } catch(err) {
+      return null;
+    }
   }
 }
 
