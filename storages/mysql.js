@@ -2,15 +2,16 @@ var mysql = require('mysql');
 
 var pool  = mysql.createPool({
   host:'localhost',
+  port : 3306,
   user:'root',
   password:'duan1234',
   database:'test'
 });
 
 module.exports = {
-  update: (todos) => {
+  update: (todo) => {
     return new Promise((resolve, reject) => {
-      pool.query(`INSERT INTO todo VALUES ("${todo}")`, function(error, results, fields) {
+      pool.query(`INSERT INTO todo VALUES (${todo})`, function(error, results, fields) {
         if (error) {
           throw error
         }
@@ -18,7 +19,7 @@ module.exports = {
       })
     })
   },
-  get: (todoId) => {
+  get: (id) => {
     return new Promise((resolve, reject) => {
       pool.query(`SELECT todo FROM todos WHERE id=${id}`, function(error, results, fields) {
         if (error) {
