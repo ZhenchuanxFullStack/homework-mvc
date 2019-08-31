@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --recursive",
     "test-w": "./node_modules/.bin/mocha --watch --bail",
-    "cov": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha --recursive && open coverage/lcov-report/index.html"
+    "cov": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha --recursive",
+    "cov-report": "open coverage/lcov-report/index.html"
   },
   "author": "",
   "license": "ISC",
