@@ -22,4 +22,9 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
 
-module.exports = app.listen(3000);
+//if (require.main.filename == module.filename) {
+if (require.main.filename.indexOf('/mocha') > -1) {
+  module.exports = app.listen()
+} else {
+  module.exports = app.listen(3000);
+}

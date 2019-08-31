@@ -1,19 +1,23 @@
-const JSONFileStorage = require('../storages/jsonfile');
+const db = require('../storages/mysql');
 
 class Model {
 }
 class Todo extends Model {
   async create(todo) {
-    var todos = await JSONFileStorage.get();
-    todos.push(todo);
-    await JSONFileStorage.update(todos);
-    return todos.length - 1
+    var id = await db.query('INSERT INTO `todo` (`name`) VALUES (?); ', [todo])
+    return id
   }
   async getAll() {
-    return await JSONFileStorage.get();
+    var result = [];
+    var data = await db.query('select name from todo');
+    for (var i in data) {
+      result.push(data[i])
+    }
+    return result
   }
   async get(id) {
-    return (await this.getAll())[id]
+    var data = await db.query('select name from todo where id=?', id);
+    return data[0] && data[0].name
   }
 }
 

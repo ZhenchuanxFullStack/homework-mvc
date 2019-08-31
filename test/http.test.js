@@ -63,19 +63,16 @@ describe('HTTP', () => {
           .expect(/\d+/)
       })
 
-      it('GET /api/todo should return the data which in file /data/todo.json', async () => {
-        var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
+      it('GET /api/todo should return all the data', async () => {
         var res = await request
           .get('/api/todo')
-          .expect(dataFile.toString())
+        should(res.body).be.Array();
       })
 
       it('GET /api/todo/id should return only one todo', async () => {
-        var dataFile = await readFile(path.join(__dirname, '../data/todo.json'))
-        var data = JSON.parse(dataFile.toString());
         var res = await request
           .get('/api/todo/1')
-          .expect(data[1])
+          .expect('一条新的todo')
       })
 
       it('GET /api/todo/id should return 404 if id not exists', async () => {
