@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive",
     "test-w": "mocha --watch --bail",
-    "cov": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha --recursive",
-    "cov-report": "open coverage/lcov-report/index.html"
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha --recursive",
+    "test-report": "open coverage/lcov-report/index.html"
   },
   "author": "",
   "license": "ISC",

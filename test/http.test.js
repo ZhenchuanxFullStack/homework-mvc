@@ -26,7 +26,6 @@ describe('HTTP', () => {
 
   describe('API', async () => {
     describe('when not logged in', async () => {
-      /*
       it('POST /api/todo should require to auth', async () => {
         var res = await request
           .post('/api/todo')
@@ -40,7 +39,6 @@ describe('HTTP', () => {
         var res = await request.get('/api/todo')
         should(res.statusCode).equal(401)
       })
-      */
 
     });
 
