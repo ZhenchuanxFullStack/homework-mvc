@@ -26,5 +26,6 @@ app
 if (require.main.filename.indexOf('/mocha') > -1) {
   module.exports = app.listen()
 } else {
+  console.log('完全o98k!')
   module.exports = app.listen(3000);
 }
