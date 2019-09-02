@@ -6,6 +6,7 @@ module.exports = {
   },
   login: async ctx => {
     var data = ctx.request.body;
+    /* istanbul ignore else  */
     if (data.password) { // 伪逻辑
       ctx.session.user = data.user
     }
@@ -20,6 +21,7 @@ module.exports = {
     ctx.body = await TodoModel.getAll();
   },
   get: async ctx => {
+    /* istanbul ignore if  */
     if (ctx.session.user != 'eric') return ctx.status = 401
     var todo = await TodoModel.get(ctx.params.id)
     if (todo) {

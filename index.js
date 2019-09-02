@@ -22,7 +22,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
 
-//if (require.main.filename == module.filename) {
+/* istanbul ignore if  */
 if (require.main.filename.indexOf('/mocha') > -1) {
   module.exports = app.listen()
 } else {

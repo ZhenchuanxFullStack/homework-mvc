@@ -2,6 +2,16 @@ const should = require('should')
 const util = require('util')
 const fs = require('fs')
 const path = require('path')
+
+const mysql = require('mysql')
+const sinon = require('sinon')
+const stub = sinon.stub(mysql, 'createPool')
+const query = sinon.stub()
+stub.returns({
+  query
+})
+// 解决mysql.js覆盖率问题
+query.yields(null, 1)
 const app = require('../index.js')
 const request = require("supertest").agent(app);
 
@@ -10,6 +20,7 @@ const readFile = util.promisify(fs.readFile)
 describe('HTTP', () => {
   after(function (done) {
     app.close();
+    stub.restore();
     done();
   });
   it('should return home page', async () =>  {
@@ -44,6 +55,7 @@ describe('HTTP', () => {
 
     describe('when logged in', async () => {
       it('should login and redirect to home page', async () => {
+        query.yields(null, 1)
         var res = await request
           .post('/login')
           .send({
@@ -55,6 +67,7 @@ describe('HTTP', () => {
       });
 
       it('POST /api/todo should return success', async () => {
+        query.yields(null, 1)
         var res = await request
           .post('/api/todo')
           .send({
@@ -64,18 +77,21 @@ describe('HTTP', () => {
       })
 
       it('GET /api/todo should return all the data', async () => {
+        query.yields(null, [{}, {}])
         var res = await request
           .get('/api/todo')
         should(res.body).be.Array();
       })
 
       it('GET /api/todo/id should return only one todo', async () => {
+        query.yields(null, [{name: '一条新的todo'}])
         var res = await request
           .get('/api/todo/1')
           .expect('一条新的todo')
       })
 
       it('GET /api/todo/id should return 404 if id not exists', async () => {
+        query.yields(null, [])
         var res = await request
           .get('/api/todo/x')
         should(res.statusCode).equal(404)
