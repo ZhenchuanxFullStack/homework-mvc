@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-w": "mocha --watch --bail",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-summary mocha --recursive",
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --recursive",
     "test-report": "open coverage/lcov-report/index.html"
   },
   "author": "",
