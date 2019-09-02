@@ -22,9 +22,10 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
 
-//if (require.main.filename == module.filename) {
+/* istanbul ignore else  */
 if (require.main.filename.indexOf('/mocha') > -1) {
   module.exports = app.listen()
 } else {
+  console.log('完全o98k!')
   module.exports = app.listen(3000);
 }
