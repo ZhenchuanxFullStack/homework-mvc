@@ -8,6 +8,7 @@ const sinon = require("sinon");
 const stub = sinon.stub(mysql, "createPool");
 const query = sinon.stub();
 stub.returns({ query });
+query.yields(null, 233);
 
 const app = require("../index.js");
 const request = require("supertest").agent(app);
