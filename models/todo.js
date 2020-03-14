@@ -4,7 +4,7 @@ class Model {
 }
 class Todo extends Model {
   async create(todo) {
-    var id = await db.query('INSERT INTO `todo` (`name`) VALUES (?); ', [todo])
+    var id = await db.query('INSERT INTO todo(name) VALUES (?); ', [todo])
     return id
   }
   async getAll() {
@@ -16,7 +16,7 @@ class Todo extends Model {
     return result
   }
   async get(id) {
-    var data = await db.query('select name from todo where id=?', id);
+    var data = await db.query('select name from todo where id=?', [id]);
     return data[0] && data[0].name
   }
 }
