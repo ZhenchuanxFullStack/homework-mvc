@@ -9,6 +9,7 @@ var pool  = mysql.createPool({
   database        : config.database
 });
 
+//测试数据库的连通性
 pool.query('select * from user limit 1', function(err, results, fields){
   /* istanbul ignore else  */
   if (results) console.log("mysql online")
